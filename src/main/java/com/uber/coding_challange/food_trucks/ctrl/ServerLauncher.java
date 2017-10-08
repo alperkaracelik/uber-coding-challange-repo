@@ -1,7 +1,5 @@
 package com.uber.coding_challange.food_trucks.ctrl;
 
-import java.io.File;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
