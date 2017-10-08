@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Food Tracks</title>
+<title>Food Trucks</title>
 <meta name="viewport" content="initial-scale=1.0">
 <meta charset="utf-8">
 <style>
@@ -55,7 +55,7 @@ html, body {
   			<option value="onhold">Onhold</option>
   		</select>
   		<hr>
-		<input onclick="getFoodTracks();" style="background-color: #ccc; font-family: 'Roboto', 'sans-serif';" type=button value="Show Food Tracks">
+		<input onclick="getFoodTrucks();" style="background-color: #ccc; font-family: 'Roboto', 'sans-serif';" type=button value="Show Food Trucks">
 	</div>
 
 	<div id="map"></div>
@@ -69,7 +69,7 @@ html, body {
 		}
 	
 		// API URI TODO: Should be changed after publishing
-		var api = "http://localhost:8080/food_trucks/webapi/foodtracks/query?";
+		var api = "http://localhost:8080/food_trucks/webapi/foodtrucks/query?";
 		
 		// Map objects/references
 		var map;
@@ -161,7 +161,7 @@ html, body {
 		
 		// Constructs the query string
 		// Runs the query and obtains the result in JSON format.
-		function getFoodTracks() 
+		function getFoodTrucks() 
 		{
 			var status = document.getElementById("status");
 			var url = api;
@@ -185,18 +185,18 @@ html, body {
 			if (query_status.valid)
 			{
 				// Run the query and obtains the result in JSON format.
-				// Propagate the JSON object to 'getFoodTracksJSON()' function
-				$.getJSON(url, getFoodTracksJSON);
+				// Propagate the JSON object to 'getFoodTrucksJSON()' function
+				$.getJSON(url, getFoodTrucksJSON);
 			}
 		}
 
 		// Traverses through JSON objects and construct the map markers.
-		function getFoodTracksJSON(data) 
+		function getFoodTrucksJSON(data) 
 		{
 			// Clear the markers from previous query
 			clearMarkers();
 
-			// Traverse in the received food track list:
+			// Traverse in the received food truck list:
 			for (var i = 0; i < data.length; i++) 
 			{
 				// Info window
@@ -307,23 +307,23 @@ html, body {
 			}
 		}
 
-		// Returns the content of info window of the given food track
-		function getInfoWindowContentString(foodTrack)
+		// Returns the content of info window of the given food truck
+		function getInfoWindowContentString(foodTruck)
 		{
 			content = 
 				'<div id="content">'+
 	            '<div id="siteNotice">'+
 	            '</div>'+
-	            '<b>Applicant: </b>' + foodTrack.applicant + '<br/>'+
-	            '<b>Facility Type: </b>' + foodTrack.facilitytype + '<br/>' +
-	            '<b>Food Items: </b>' + foodTrack.fooditems + '<br/>'+
-	            '<b>Address: </b>' + foodTrack.address + '<br/>'+
-	            '<b>Location Description: </b>' + foodTrack.locationdescription + '<br/>'+
-	            '<b>Working Hours: </b>' + foodTrack.dayshours + '<br/>'+
-	            '<b>CNN: </b>' + foodTrack.cnn + '<br/>'+
-	            '<b>Permit: </b>' + foodTrack.permit + '<br/>'+
-	            '<b>Status: </b>' + foodTrack.status + '<br/>'+
-	            '<a href="' + foodTrack.schedule + '">Schedule</a>' +
+	            '<b>Applicant: </b>' + foodTruck.applicant + '<br/>'+
+	            '<b>Facility Type: </b>' + foodTruck.facilitytype + '<br/>' +
+	            '<b>Food Items: </b>' + foodTruck.fooditems + '<br/>'+
+	            '<b>Address: </b>' + foodTruck.address + '<br/>'+
+	            '<b>Location Description: </b>' + foodTruck.locationdescription + '<br/>'+
+	            '<b>Working Hours: </b>' + foodTruck.dayshours + '<br/>'+
+	            '<b>CNN: </b>' + foodTruck.cnn + '<br/>'+
+	            '<b>Permit: </b>' + foodTruck.permit + '<br/>'+
+	            '<b>Status: </b>' + foodTruck.status + '<br/>'+
+	            '<a href="' + foodTruck.schedule + '">Schedule</a>' +
 	            '</div>' +
 	            '</div>';
 			return content;
