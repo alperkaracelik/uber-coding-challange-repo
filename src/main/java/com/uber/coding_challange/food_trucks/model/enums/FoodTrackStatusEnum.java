@@ -1,14 +1,14 @@
 package com.uber.coding_challange.food_trucks.model.enums;
 
 /**
- * Food Truck Status enumeration.
+ * Food Track Status enumeration.
  * NO_STATEMENT: None of the enumerations
  * ALL: All of the enumerations (except NO STATEMENT)
  * 
  * @author alper.karacelik
  *
  */
-public enum FoodTruckStatusEnum 
+public enum FoodTrackStatusEnum 
 {
 	NO_STATEMENT(0, "NO STATEMENT"),
 	REQUESTED(1, "REQUESTED"),
@@ -22,7 +22,7 @@ public enum FoodTruckStatusEnum
 	private int value;
 	private String strValue;
 	
-	FoodTruckStatusEnum(int value, String strValue)
+	FoodTrackStatusEnum(int value, String strValue)
 	{
 		this.value = value;
 		this.strValue = strValue;
@@ -44,7 +44,7 @@ public enum FoodTruckStatusEnum
 	 * @param inpStrVal
 	 * @return
 	 */
-	public static FoodTruckStatusEnum getFromStringValue(String inpStrVal)
+	public static FoodTrackStatusEnum getFromStringValue(String inpStrVal)
 	{
 		if (inpStrVal == null)
 		{

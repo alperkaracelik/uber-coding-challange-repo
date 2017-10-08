@@ -7,19 +7,19 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uber.coding_challange.food_trucks.dataaccess.FoodTruckAccessor;
-import com.uber.coding_challange.food_trucks.model.FoodTruck;
+import com.uber.coding_challange.food_trucks.dataaccess.FoodTrackAccessor;
+import com.uber.coding_challange.food_trucks.model.FoodTrack;
 
 /**
  * The client class. Singleton pattern is used. 
- * Responsible for establishing a connection with DataSF API and obtaining the food truck data. 
+ * Responsible for establishing a connection with DataSF API and obtaining the food track data. 
  * It is initialized only once (with lazy initialization); 
  * therefore, the connection is established only once.
  * 
  * @author alper.karacelik
  *
  */
-public class FoodTruckClient 
+public class FoodTrackClient 
 {
 	// Constants ---------------------------------------------------------
 	private static final String DATASF_URL = "https://data.sfgov.org/resource/6a9r-agq8.json";
@@ -30,15 +30,15 @@ public class FoodTruckClient
 	// -------------------------------------------------------------------
 	
 	// SINGLETON Implementation ------------------------------------------
-	private static FoodTruckClient INSTANCE = new FoodTruckClient();
-	private FoodTruckClient() {}
-	public static FoodTruckClient getInstance() {return INSTANCE;}
+	private static FoodTrackClient INSTANCE = new FoodTrackClient();
+	private FoodTrackClient() {}
+	public static FoodTrackClient getInstance() {return INSTANCE;}
 	// -------------------------------------------------------------------
 	
 	/**
 	 * Uses the public API provided by DataSF, 
-	 * Obtains all the food truck data
-	 * Pushes the obtained data to the Food Truck Accessor (the storage handler)
+	 * Obtains all the food track data
+	 * Pushes the obtained data to the Food Track Accessor (the storage handler)
 	 * Uses lazy initialization. 
 	 * This method is called after the first request to the web service.
 	 * Other calls will simply be ignored.
@@ -46,7 +46,7 @@ public class FoodTruckClient
 	 */
 	public void initialize()
 	{
-		synchronized (FoodTruckAccessor.class) 
+		synchronized (FoodTrackAccessor.class) 
 		{
 			// Continue if not already initialized.
 			if (! initialized)
@@ -56,14 +56,14 @@ public class FoodTruckClient
 					URL url = new URL(DATASF_URL);
 					ObjectMapper jsonMapper = new ObjectMapper();
 					
-					// Obtain the food trucks
-					List<FoodTruck> foodTruckList = 
-							jsonMapper.readValue(url, new TypeReference<List<FoodTruck>>(){});
+					// Obtain the food tracks
+					List<FoodTrack> foodTrackList = 
+							jsonMapper.readValue(url, new TypeReference<List<FoodTrack>>(){});
 					
-					// Add the received food trucks to our storage
-					for (FoodTruck foodTruck : foodTruckList)
+					// Add the received food tracks to our storage
+					for (FoodTrack foodTrack : foodTrackList)
 					{
-						FoodTruckAccessor.getInstance().addFoodTruck(foodTruck);
+						FoodTrackAccessor.getInstance().addFoodTrack(foodTrack);
 					}
 					
 					// set initialized flag true

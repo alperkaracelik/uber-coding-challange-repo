@@ -8,20 +8,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.uber.coding_challange.food_trucks.ctrl.FoodTruckClient;
-import com.uber.coding_challange.food_trucks.dataaccess.FoodTruckAccessor;
-import com.uber.coding_challange.food_trucks.model.FoodTruck;
+import com.uber.coding_challange.food_trucks.ctrl.FoodTrackClient;
+import com.uber.coding_challange.food_trucks.dataaccess.FoodTrackAccessor;
+import com.uber.coding_challange.food_trucks.model.FoodTrack;
 import com.uber.coding_challange.food_trucks.model.enums.DistanceUnitEnum;
-import com.uber.coding_challange.food_trucks.model.enums.FoodTruckStatusEnum;
+import com.uber.coding_challange.food_trucks.model.enums.FoodTrackStatusEnum;
 
 /**
- * Root resource (exposed at "foodtrucks" path)
+ * Root resource (exposed at "foodtracks" path)
  */
-@Path("foodtrucks")
+@Path("foodtracks")
 /**
  * This class provides the entry point for the web service by providing two different GET methods.
- * 1) getFoodTrucks(): Returns all the food trucks.
- * 2) getFoodTrucksByQuery(): Returns the food trucks that provides the given query conditions.
+ * 1) getFoodTracks(): Returns all the food tracks.
+ * 2) getFoodTracksByQuery(): Returns the food tracks that provides the given query conditions.
  * 
  * @author alper.karacelik
  *
@@ -31,32 +31,32 @@ public class FoodTrucksResource
 	// Constructor
 	public FoodTrucksResource()
 	{
-		FoodTruckClient.getInstance().initialize();
+		FoodTrackClient.getInstance().initialize();
 	}
 	
     /**
      * Method handling HTTP GET requests. The returned object will be sent
      * to the client as "application/json" media type.
      *
-     * @return Food Trucks in JSON format
+     * @return Food Tracks in JSON format
      */
     @GET	
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FoodTruck> getFoodTrucks() 
+    public List<FoodTrack> getFoodTracks() 
     {
-    	return FoodTruckAccessor.getInstance().getAllFoodTrucks();
+    	return FoodTrackAccessor.getInstance().getAllFoodTracks();
     }
     
     /**
      * Method handling HTTP GET requests. The returned object will be sent
      * to the client as "application/json" media type.
      *
-     * @return Food Trucks in JSON format
+     * @return Food Tracks in JSON format
      */
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FoodTruck> getFoodTrucksByQuery(
+    public List<FoodTrack> getFoodTracksByQuery(
     		@QueryParam("status") String statusStr,
             @QueryParam("latitude") String latitudeStr,
             @QueryParam("longitude") String longitudeStr,
@@ -64,20 +64,20 @@ public class FoodTrucksResource
             @QueryParam("radius_unit") String radiusUnitStr)
     {
     	// Query Results
-    	List<FoodTruck> queryResult = null;
+    	List<FoodTrack> queryResult = null;
     	
-    	// Food truck status
-		FoodTruckStatusEnum statusEnum = FoodTruckStatusEnum.ALL;
+    	// Food track status
+		FoodTrackStatusEnum statusEnum = FoodTrackStatusEnum.ALL;
 		
     	// If status is specified
     	if (statusStr != null)
     	{
     		// Obtain the status
-    		statusEnum = FoodTruckStatusEnum.getFromStringValue(statusStr);
+    		statusEnum = FoodTrackStatusEnum.getFromStringValue(statusStr);
     	}
     	
     	// Update the query results by querying on 'status'
-		queryResult = FoodTruckAccessor.getInstance().getFoodTrucks(statusEnum);
+		queryResult = FoodTrackAccessor.getInstance().getFoodTracks(statusEnum);
     	
     	// If latitude and longitude is specified
     	if (latitudeStr != null && longitudeStr != null && radiusStr != null && radiusUnitStr != null)
@@ -91,7 +91,7 @@ public class FoodTrucksResource
         		DistanceUnitEnum radiusUnit = DistanceUnitEnum.getFromStringValue(radiusUnitStr); 
         		
         		// Update the query results 
-        		queryResult = FoodTruckAccessor.getInstance().getFoodTrucks(queryResult, latitude, longitude, radius, radiusUnit);
+        		queryResult = FoodTrackAccessor.getInstance().getFoodTracks(queryResult, latitude, longitude, radius, radiusUnit);
 			} 
     		catch (Exception e) 
     		{

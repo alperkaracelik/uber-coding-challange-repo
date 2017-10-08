@@ -1,18 +1,18 @@
 package com.uber.coding_challange.food_trucks.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.uber.coding_challange.food_trucks.model.enums.FoodTruckStatusEnum;
+import com.uber.coding_challange.food_trucks.model.enums.FoodTrackStatusEnum;
 
 /**
- * Food Truck class. 
- * This class is associated with both requested and provided Food Truck JSON objects
+ * Food Track class. 
+ * This class is associated with both requested and provided Food Track JSON objects
  * Jackson framework is used for JSON convertions
  * 
  * @author alper.karacelik
  *
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class FoodTruck 
+public class FoodTrack 
 {	
 	// Attributes --------------------------------------------------------
 	private long objectid;
@@ -31,7 +31,7 @@ public class FoodTruck
 	// -------------------------------------------------------------------
 	
 	// Constructor(s) ----------------------------------------------------
-	public FoodTruck() 
+	public FoodTrack() 
 	{
 		super();
 	}
@@ -123,9 +123,9 @@ public class FoodTruck
 	 * Returns the related Status enumeration
 	 * @return The related Status enumeration
 	 */
-	public FoodTruckStatusEnum getStatusEnum()
+	public FoodTrackStatusEnum getStatusEnum()
 	{
-		return FoodTruckStatusEnum.getFromStringValue(status);
+		return FoodTrackStatusEnum.getFromStringValue(status);
 	}
 	// -------------------------------------------------------------------
 }
