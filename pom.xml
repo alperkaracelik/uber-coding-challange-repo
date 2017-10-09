@@ -115,8 +115,6 @@
 			<version>${tomcat.version}</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
 			<artifactId>jersey-test-framework-provider-bundle</artifactId>
@@ -129,9 +127,10 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.6.3</version>
 		</dependency>
+		
 	</dependencies>
 	<properties>
-		<jersey.version>2.26</jersey.version>
+		<jersey.version>2.26-b03</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jetty.version>9.4.7.v20170914</jetty.version>
 		<tomcat.version>8.5.2</tomcat.version>
