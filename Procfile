@@ -1,1 +1,1 @@
-web: java -cp target/classes:target/dependency/* com.uber.coding_challange.food_trucks.Main
+web: sh target/bin/webapp
