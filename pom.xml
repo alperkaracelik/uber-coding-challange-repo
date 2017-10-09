@@ -33,6 +33,11 @@
 							<mainClass>com.uber.coding_challange.food_trucks.Main</mainClass>
 						</manifest>
 					</archive>
+					<webResources>
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources</directory>
+                    </resource>
+                </webResources>
 				</configuration>
 			</plugin>
 
@@ -75,38 +80,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
-			<version>${tomcat.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-logging-juli</artifactId>
-			<version>${tomcat.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<version>${tomcat.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper</artifactId>
-			<version>${tomcat.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper-el</artifactId>
-			<version>${tomcat.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jsp-api</artifactId>
 			<version>${tomcat.version}</version>
 		</dependency>
 		<dependency>
@@ -114,12 +89,10 @@
 			<artifactId>tomcat-catalina</artifactId>
 			<version>${tomcat.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
-			<artifactId>jersey-test-framework-provider-bundle</artifactId>
-			<type>pom</type>
-			<scope>test</scope>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-util-scan</artifactId>
+		    <version>9.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -128,11 +101,19 @@
 			<version>2.6.3</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.glassfish.jersey.inject</groupId>
+		    <artifactId>jersey-hk2</artifactId>
+		</dependency>
+
 	</dependencies>
 	<properties>
-		<jersey.version>2.26-b03</jersey.version>
+		<jersey.version>2.26</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jetty.version>9.4.7.v20170914</jetty.version>
 		<tomcat.version>8.5.2</tomcat.version>
 	</properties>
 </project>

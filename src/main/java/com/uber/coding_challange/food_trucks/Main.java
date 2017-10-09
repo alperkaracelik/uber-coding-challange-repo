@@ -12,8 +12,9 @@ import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.EmptyResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
-import org.apache.tomcat.util.scan.Constants;
-import org.apache.tomcat.util.scan.StandardJarScanFilter;
+import org.apache.tomcat.JarScanFilter;
+import org.apache.tomcat.JarScanType;
+import org.apache.tomcat.util.scan.StandardJarScanner;
 
 public class Main {
 
@@ -55,6 +56,17 @@ public class Main {
             webContentFolder = Files.createTempDirectory("default-doc-base").toFile();
         }
         StandardContext ctx = (StandardContext) tomcat.addWebapp("", webContentFolder.getAbsolutePath());
+        
+        System.out.println("*** " + ctx);
+        System.out.println("*** " + (ctx.getJarScanner() instanceof StandardJarScanner));
+        System.out.println("*** " + ctx.getJarScanner().getClass());
+        System.out.println("*** " + ((StandardJarScanner) ctx.getJarScanner()));
+        
+        StandardJarScanner stdJarScanner = (StandardJarScanner) ctx.getJarScanner();
+        
+        StandardJarScanner scanner=new StandardJarScanner();
+        stdJarScanner.setScanManifest(false);
+
         //Set execution independent of current thread context classloader (compatibility with exec:java mojo)
         ctx.setParentClassLoader(Main.class.getClassLoader());
 
@@ -62,7 +74,7 @@ public class Main {
 
         // Declare an alternative location for your "WEB-INF/classes" dir
         // Servlet 3.0 annotation will work
-        File additionWebInfClassesFolder = new File(root.getAbsolutePath(), "target/classes");
+        File additionWebInfClassesFolder = new File(root.getAbsolutePath(), "target/classes/");
         WebResourceRoot resources = new StandardRoot(ctx);
 
         WebResourceSet resourceSet;
@@ -72,10 +84,16 @@ public class Main {
         } else {
             resourceSet = new EmptyResourceSet(resources);
         }
+        
+        System.out.println("*** 1 ***");
         resources.addPreResources(resourceSet);
+        System.out.println("*** 2 ***");
         ctx.setResources(resources);
-
+        System.out.println("*** 3 ***");
+        
         tomcat.start();
+        System.out.println("*** 4 ***");
         tomcat.getServer().await();
+        System.out.println("*** 5 ***");
     }
 }
