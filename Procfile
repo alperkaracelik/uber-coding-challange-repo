@@ -1,1 +1,1 @@
-web: java -cp target/classes:target/dependency/* com.akaracelik.my_heroku_webapp.heroku.Main
+web: java -cp target/classes:target/dependency/* com.uber.coding_challange.food_trucks.Main
