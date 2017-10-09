@@ -1,1 +1,1 @@
-web: target/bin/webapp.bat
+web: java -cp target/classes:target/dependency/* com.akaracelik.my_heroku_webapp.heroku.Main
